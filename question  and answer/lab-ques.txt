@@ -1,0 +1,343 @@
+Q. Script :::: Create a script /root/myscript.sh that should print "redhat" when user input "fedora" as argument, & vice-versa, it should print "redhat|fedora" without argument.
+
+
+#!/usr/bin/bash
+
+case $1 in
+	"redhat")
+		echo "fedora"
+		;;
+	"fedora")
+		echo "redhat"
+		;;
+	"")
+		echo "redhat|fedora"
+		;;
+esac
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q. How do you print the lines between 5 and 10, both inclusive?
+
+
+
+cat file.txt | head -n 10 | tail -n 6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q. Create a new file “new.txt” that is a concatenation of “file1.txt” and “file2.txt”?
+
+cat new.txt file1.txt > file2.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q. What is the output of the following code:
+
+os=Unix
+echo 1.$os 2."$os" 3.'$os' 4.$os
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q. What is the output of this command?
+
+cat < file1 >> file2 | file3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q. Syntax to suppress the display of command error to monitor?
+
+command 2> /dev/null
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q1. Find a .conf extension files in /etc and copy files to /search
+
+# cp -av /etc/*.conf /search
+
+# grep -r "*.conf" /etc -exec 
+
+# find /etc -name "*.conf" 
+
+Q2. Find the root string in /etc/passwd file and copy that string in /string.txt
+
+grep "root" /etc/passwd > /string
+
+Q3. Find files which are owned by user "natasha" and copy them to "/data"
+
+find / -user natasha -exec cp -av {} /data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q4. You need to change the owner of a file named /tmp/exe from harry, who is a member of the users group, to natasha, who is a member of the editors group. Assuming you want to change both user and group owners, which command will do this?
+
+
+# chown natasha:editors /tmp/exe
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++
+1. find the "firebase" url of each application (APK)
+2. Check for the endpoint "/.json" 
+3. if the URL endpoint is not accessible then print 
+	"URL" : Permission Denied
+4. If the URL endpoint is readable/accessible the print
+	"URL" : Readable
+5. Add one argument for script : 
+	- if URL endpoint is readable then with the argument script will show the content.

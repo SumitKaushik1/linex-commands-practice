@@ -1,0 +1,34 @@
+done=1.Create a directory sample
+done=2.Go inside  sample directory
+done=3.Create directory with your name
+done=4.Check the list of directories here
+done=5.Go outside of current directory
+
+done=6.Create data1->data2->data3->data4 directory
+done=7.Go to data4
+done=8.Create data5 dir inside data3
+done=9.Create a.txt,b.txt file inside data1
+done=10.Create c.txt d.txt file inside data5
+done=11.Go to data5
+done=12.Copy d.txt to data4
+done=13.Move c.txt to data4
+done=14.Copy a.txt to data3
+done=15.Move b.txt to data4
+
+done=16.Go to data4
+done=17.Move a.txt to data2
+done=18.Go to data1
+done=19.Copy data5 to data2
+done=20.Move data4 to data5
+
+done=21.Create bio.txt in data5 and write your name in it.
+done=22.Append your age to the bio.txt
+
+
+
+
+
+
+
+
+

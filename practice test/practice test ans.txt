@@ -1,0 +1,433 @@
+first part
+
+
+# means root user (special user)
+$ means specific user ( normal user)
+
+_______________________1.Store memory stats in file memory.txt
+
+# cat /proc/meminfo | cat >memory.text
+# cat memory.text
+
+_____________________2.Append disk stats to memory.txt
+#df
+#df | cat >>memory.text
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+second part
+
+______________________1.Give executable permission to user only to memory.txt
+
+#chmod 144 memory.text
+
+_______________2.Only user should able to read and write the bio.txt.Group and others can't do anything
+
+#chmod 600 bio.text
+
+_____________________3.Create a file data.txt. Redirect output of lspci command to it
+
+#lspci | cat data.txt (not supported in wsl ) 
+
+_________________4.Only user and edit the file. Group and others can read the file only4.
+
+# touch data.text
+# ls -l data.text
+
+-rw-r--r-- 1 root root 0 Apr 10 16:41 data.text
+# chmod 244 data.text
+
+# ls -l data.text
+--w-r--r-- 1 root root 0 Apr 10 16:41 data.text
+
+____________________5.Append uname command output to the data.txt.
+
+#uname >> data.text
+
+______________________6.Create Data1,Data2 and Data3 directory
+
+#mkdir  Data1  Data2  Data3
+# ls -l
+#-rw-r--r-- 1 root  root       0 Apr 10 20:31 Data1
+#-rw-r--r-- 1 root  root       0 Apr 10 20:31 Data2
+#-rw-r--r-- 1 root  root       0 Apr 10 20:31 Data3
+
+
+______________________7.Give all permissions to all users on all three dir.
+
+#chmod 777 Data1  Data2  Data3
+
+#ls -l
+#-rwxrwxrwx 1 root  root       0 Apr 10 20:31 Data1
+#-rwxrwxrwx 1 root  root       0 Apr 10 20:31 Data2
+#-rwxrwxrwx 1 root  root       0 Apr 10 20:31 Data3
+
+_________________________8.Create a.txt,b,txt and c.txt in Data1,Data2 and Data3
+
+#cd Data1; touch a.txt; cd ~/Data2 ; touch b.txt ; cd ~/Data3 ;touch c.txt
+
+_________________________9.Give read and write and executables permisison to user only on a.txt
+#ls -l
+#-rw-r--r-- 1 root root 0 Apr 10 22:03 a.txt
+
+#chmod 700 a.txt
+
+# ls -l
+#-rwx------ 1 root root 0 Apr 10 22:03 a.txt
+
+_________________________10.Give read,write and executable permission to group only on b.txt
+# cd Data2; chmod 070 b.txt
+# ls -l b.txt
+----rwx--- 1 root root 0 Apr 10 22:03 b.txt
+
+__________________________11.Give read,write and executable permission to others only on c.txt.
+# cd Data3 ; chmod 007 c.txt
+# ls -l c.txt
+-------rwx 1 root root 0 Apr 10 22:03 c.txt
+
+__________________________12.Rename c.txt to info.txt
+#-rw-r--r-- 1 root root    0 Apr 11 16:59 c.txt
+
+# mv c.txt info.txt
+
+#-rw-r--r-- 1 root root    0 Apr 11 16:59 info.txt
+
+___________________________13.Write your name into info.txt
+#cat >info.txt
+#sumit kaushik
+
+#cat info.txt
+#sumit kaushik
+
+_______________________________14.Give read only permission to only user on Data1
+#chmod 400 Data1
+#ls -l
+#dr-------- 1 root root 4096 Apr 11 17:08 Data1
+
+_________________________________15.Change dir to Data1
+# mkdir Data1
+# cd Data1
+
+______________________________16.List content of Data1 dir
+# ls -l Data1
+-rw-r--r-- 1 root root 0 Apr 11 23:29 a.txt
+______________________________17.Copy a.txt from Data1 to Data2
+# mkdir Data2
+# cp ~/Data1/a.txt  ~/Data2
+________________________________18.Give executable only permisson to only user on Data2 
+
+#drwxr-xr-x 1 root root 4096 Apr 11 23:31 Data2
+
+#chmod 100 Data2
+
+#ls -l
+
+#d--x------ 1 root root 4096 Apr 11 23:31 Data2
+
+______________________________19.Change dir to Data2
+# cd ~/Data2
+
+________________________________20.List content of Data2 dir
+
+cd ~/Data2; ls -l
+total 0
+-rw-r--r-- 1 root root 0 Apr 11 23:31 a.txt
+-rw-r--r-- 1 root root 0 Apr 12 00:28 b.txt
+
+______________________________21.Copy b.txt from Data2 to Data3
+
+ mkdir Data3
+
+cp ~/Data2/a.txt ~/Data3
+
+ ls -l ~/Data3
+
+-rw-r--r-- 1 root root 0 Apr 12 21:44 a.txt
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+third part 
+
+_________________1.Redirect the output of ls -l to file.txt
+#ls -l
+
+#ls -l > file.txt
+
+#cat file.txt
+
+
+
+_________________2.Append the output of dmesg command to file.txt
+
+
+dmesg is a display message command and to display kernel-related messages on Unix-like systems. It used to control the kernel ring buffer. The output contains messages produced by the device drivers
+dmesg command also called as “driver message” or “display message” is used to examine the kernel ring buffer and print the message buffer of ...
+
+# dmesg >> file.txt
+# cat  file.txt
+
+__________________3.Copy the content of file.txt to new_file.txt
+
+# cp file.txt new_file.txt
+# cat  new_file.txt
+_______________________4.Find number of lines in new_file.txt
+
+#cat  new_file.txt | wc -l
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+_________________________________1.Delete test,test1,test2
+
+# touch test  test1   test2
+#rm test test1 test2
+
+_________________________________2.Create three users, raj,ravi,neha using adduser command.
+ #adduser raj
+ #adduser ravi
+ #adduser neha
+
+_________________________________3.Create data1.txt,data2.txt.Write your name in data1.txt
+
+#touch data1.txt data2.txt; cat > data1.txt
+sumit kaushik
+# cat data1.txt
+sumit kaushik
+_________________________________4.Add neha and ravi to superuser group.
+
+#groupadd superuser
+# cat /etc/group
+superuser:x:1004:
+#usermod -a -G  superuser neha
+#cat /etc/group
+superuser:x:1004:neha
+#usermod -a -G  superuser ravi
+#cat /etc/group
+superuser:x:1004:neha,ravi
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&abreaviate used for user control here&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+1->raj
+2->ravi
+3->neha 
+_________________________________5.Login with raj and try to write content in data2.txt.(raj is normal user)
+# cat /etc/passwd
+# chmod o=rwx /root
+# chmod o=rwx data2.txt
+#su raj
+1->$cat > data2.txt
+1>sumit kaushik is good
+
+
+
+
+
+
+______________________________6.Read the data1.txt(raj is noraml user)
+1->$ cat data2.txt
+1->sumit kaushik is good
+
+________________________________7.Logout from raj and login with ravi.
+1->$ su ravi
+1->$password = sumit123
+2->$
+
+_________________________________8.Try to write content in data2.txt and data1.txt.
+# chmod o=rwx data1.txt
+# chmod o=rwx data2.txt
+# su ravi
+2->$ cat > data1.txt
+sumit kaushik
+2->$ cat > data2.txt
+is good 
+
+___________________________________9.Read the data1.txt and data2.txt
+2->$ cat data1.txt
+sumit kaushik
+2->cat data2.txt
+is good
+
+___________________________________10.Logout from ravi
+2->$exit
+
+or
+2-> $ logout
+____________________________________11.Change ownership of data1.txt to raj
+
+#chown raj data1.txt
+
+# getfacl data1.txt
+file: data1.txt
+owner: raj
+group: root
+user::rw-
+group::r--
+other::rwx
+
+#ls -l data1.txt
+-rw-r--rwx 1 raj root 14 Apr 13 15:03 data1.txt
+
+# chgrp raj data1.txt
+# ls -l
+-rw-r--rwx 1 raj   raj      14 Apr 13 15:03 data1.txt
+
+________________________________12.Change ownership and group of data2.txt to neha and raj.
+
+# chown neha data2.txt
+
+# chgrp raj data2.txt
+
+# getfacl data2.txt
+# file: data2.txt
+# owner: neha
+# group: raj
+user::rwx
+group::r--
+other::rwx
+
+
+_____________________________13.Try to append your name to data1.txt
+
+# chmod o=rwx data1.txt
+# cat >>data1.txt
+data is appended
+# cat data1.txt
+sumit kaushik
+data is appended
+
+_____________________________14.Try to append your name to data2.txt
+
+# chmod o=rwx data2.txt
+# cat >>data2.txt
+data is appended
+# cat data2.txt
+sumit kaushik
+data is appended
+
+____________________________15.login with raj and try to change the ownership of data2.txt to raj.
+
+# usermod -a -G sudo  raj      //first add raj sudo group ie super user group that root has ,note =>sudo means superuser do 
+# cat /etc/group
+sudo:x:27:raj
+# su raj  
+    
+/*To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+ other wise without sudo act like normal user                                                           
+*/
+
+1->$sudo chown raj data2.txt
+1->$ls -l data2.txt
+1->-rwxr--rwx 1 raj raj 22 Apr 13 19:22 data2.txt
+
+______________________________16.Logout and Deactivate the ravi account.(Change login shell to nologin)
+# usermod ravi -s /usr/nologin // basically it is link actual directory is  /usr/sbin/nologin // -s = shell
+# su ravi
+su: failed to execute /usr/nologin: No such file or directory
+
+________________________________17.Login with neha and change ownership of data1.txt to neha.
+# usermod -a -G sudo neha
+# su neha // switch user= su
+$ sudo chown neha data1.txt// superuser do =sudo
+3->$ ls -l data1.txt
+-rw-r--rwx 1 neha raj 31 Apr 14 17:37 data1.txt
+
+
+_______________________________18.login with superuser
+ #useradd -r pritam
+#cat /etc/passwd
+pritam:x:998:998::/home/pritam:/bin/sh
+# su pritam
+
+________________________________19.Create hidden directory data
+# mkdir .data
+# ls -a
+
+________________________________20.Create hidden file a.txt inside data
+# cd .data
+# touch .a.txt
+# ls -a
+.  ..  .a.txt
+________________________________21.Remove data directory
+# rm -r .data
+
+
+__________________________________22.Download   ,https://corgis-edu.github.io/corgis/csv/cars/  ,csv file from this page.
+done
+
+___________________________________23.Find all lines with "All-wheel drive"
+
+# cat cars.csv | grep "All-wheel drive"
+
+__________________________________24.Find all lines with "Gasoline"
+# cat cars.csv | grep "Gasoline"
+_________________________________25.Find all lines which have Audi and 8 cylinder
+
+# cat cars.csv | egrep "Audi |8 cylinder"// by extended grep
+or 
+# cat cars.csv | grep "Audi \| 8 cylinder"// by normal grep
+
+_______________________________26.Find all lines which have 2.0L to 4.2L
+# cat cars.csv |   grep  "[2-4]\.[0-2]L"
+
+_______________________________27.Find all lines with "Front-wheel drive" and "Turbo".
+
+# cat cars.csv | egrep -i "front-wheel drive|Turbo" // -i = means case insensitive
+
+________________________________28.Print all files ending with .txt in current directory.
+
+# ls -l | grep ".txt$"
+
+_______________________________29.Print count of lines with "8 cylinder" from cars.csv
+
+# cat cars.csv | grep "8 cylinder"| wc -l
+
+__________________________________30.Store top 5 lines from cars.csv to file.txt
+
+# head -n 5 cars.csv | cat > file.txt
+
+_________________________________31.Find All lines "Volvo" from 3.0L and 4.4L from cars.csv. Store last 5 lines   in filedata.txt
+# cat cars.csv | grep  "[3-4]\.[0-4]L" |grep -i "volvo"  // -i = case insensitive
+
+__________________________________32.Write Cars height,width,length to file.txt from cars.csv 
+# cat cars.csv | awk -F "," '{print $1 "|" $2 "|" $3 }'> file.txt
+
+_________________________________33.Find car no of gears and Identification.make from cars.csv
+
+# cat cars.csv | awk -F "," '{print $7 "|" $14 }'
+
+
+_________________________________34.Use ls -l command.Print size of file and name of file(size in human readable format)
+# ls -l -h |awk -F " " '{print $5 "->" $9 }'
+
+_________________________________35.Print Driveline,Engine type and identification.year from cars.csv.Print only 2009 identification year car
+
+# cat cars.csv | grep "2009" |awk -F "," '{print$4"\t\t"$5"\t\t"$16}'
+
+__________________________________36.Find Cars height,width,length whose Identification.Classification starts with A from cars.csv
+# cat cars.csv | awk -F "," '{print $1"-"$2"-"$3"-"$12}'| grep  "A[a-z]*"| cut -d"-" -f1-3
+
+___________________________________37.Print all directory permissions and name.
+# ls -l | awk -F" " '{print $1" ->" $NF}'|grep "^d"
+
+____________________________________38.Print all files permissions and name.
+# ls -l | awk -F" " '{print $1" ->" $NF}'|grep -v "^d\|^p\|^l"
+
+____________________________________39.Print all the rows of Identification.make is of 5  letters
+# cat cars.csv |awk -F"," '{print $14 }'| egrep -i "^\"[a-z]{5}\""   // -i for case insensitive
+
+
+____________________________________40.Change owner of cars.csv to root
+#chown root cars.csv
+___________________________________41.Change group of cars.csv to root
+#chgrp root  cars.csv
+____________________________________42.Try to copy cars.csv to Documents dir
+# mkdir documents; cp cars.csv documents
+___________________________________43.Try to move cars.csv to Documents dir
+# mv cars.csv documents
+
+___________________________________44.Write all users name and uid into users.txt
+# cat /etc/passwd | cut -d ":" -f1,3 |touch users.txt
+
+____________________________________45.Write all groups name into groups.txt
+#cat /etc/group | cut -d":" -f1 | cat > groups.txt
+
+_________________________________46.Append all users name with nologin shell to users.txt
+#cat /etc/passwd |  grep "nologin" | awk -F "::" '{print $1":"$2}'| cut -d":" -f1,6 | awk -F ":" '{print $1"->"$2}'> users.txt
+
+47.Find all usersname,uid with 4 digit uid
